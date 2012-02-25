@@ -156,7 +156,21 @@ enum {
 {
     // Use shader program.
     glUseProgram(passThroughProgram);
-    
+
+    // update uniform values
+	const GLchar *rName = [@"redF" UTF8String];
+	GLint rFLoc = glGetUniformLocation(passThroughProgram, rName);
+	glUniform1f(rFLoc, 1.0);
+	
+	const GLchar *gName = [@"greenF" UTF8String];
+	GLint gFLoc = glGetUniformLocation(passThroughProgram, gName);
+	glUniform1f(gFLoc, 1.0);
+	
+	const GLchar *bName = [@"blueF" UTF8String];
+	GLint bFLoc = glGetUniformLocation(passThroughProgram, bName);
+	glUniform1f(bFLoc, 1.0);
+
+	
     // Update attribute values.
 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, squareVertices);
 	glEnableVertexAttribArray(ATTRIB_VERTEX);

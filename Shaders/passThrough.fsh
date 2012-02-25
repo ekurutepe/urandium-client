@@ -1,18 +1,23 @@
-varying highp vec2 coordinate;
-uniform sampler2D videoframe;
-uniform float Fr;
-uniform float Fg;
-uniform float Fb;
+#ifdef GL_ES
+// define default precision for float, vec, mat.
+precision mediump float;
+#endif
 
+varying vec2 coordinate;
+uniform sampler2D videoframe;
+
+uniform float redF;
+uniform float greenF;
+uniform float blueF;
 
 void main()
 {
 	vec4 pic = texture2D(videoframe, coordinate);
-	float r = pic.r * 0.5;
-	float g = pic.g * 0.5;
-	float b = pic.b * 0.5;
+	float r = pic.r * redF;
+	float g = pic.g * greenF;
+	float b = pic.b * blueF;
 	
-	gl_FragColor = texture2D(videoframe, coordinate);// vec4(r,g,b, 1.0);
+	gl_FragColor = vec4(r,g,b,1.0);
 }
 
 
