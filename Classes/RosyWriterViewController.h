@@ -48,8 +48,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import "RosyWriterPreviewView.h"
 #import "RosyWriterVideoProcessor.h"
+#import <CoreMotion/CoreMotion.h>
 
-@interface RosyWriterViewController : UIViewController <RosyWriterVideoProcessorDelegate>
+@interface RosyWriterViewController : UIViewController <RosyWriterVideoProcessorDelegate,UIAccelerometerDelegate>
 {
     RosyWriterVideoProcessor *videoProcessor;
     
@@ -68,6 +69,20 @@
 	
 	AVCaptureStillImageOutput *_stillImageOutput;
 
+	CMMotionManager *motionManager;
+	
+    UIAccelerationValue accelerationX;
+    UIAccelerationValue accelerationY;
+	UIAccelerationValue accelerationZ;
+	
+    // calibration support
+    float firstCalibrationReading;
+    float currentRawReading;
+    float calibrationOffset;
+	
+	float directionX;
+	float directionY;
+	float directionZ;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *previewView;

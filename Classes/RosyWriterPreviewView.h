@@ -62,7 +62,15 @@
 	GLuint frameBufferHandle;
 	GLuint colorBufferHandle;
     GLuint passThroughProgram;
+	
+	CGFloat x;
+	CGFloat y;
+	CGFloat z;
 }
+
+@property (nonatomic, assign) CGFloat x;
+@property (nonatomic, assign) CGFloat y;
+@property (nonatomic, assign) CGFloat z;
 
 - (void)displayPixelBuffer:(CVImageBufferRef)pixelBuffer;
 

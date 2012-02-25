@@ -57,6 +57,10 @@ enum {
 
 @implementation RosyWriterPreviewView
 
+@synthesize x;
+@synthesize y;
+@synthesize z;
+
 + (Class)layerClass 
 {
     return [CAEAGLLayer class];
@@ -160,15 +164,15 @@ enum {
     // update uniform values
 	const GLchar *rName = [@"redF" UTF8String];
 	GLint rFLoc = glGetUniformLocation(passThroughProgram, rName);
-	glUniform1f(rFLoc, 1.0);
+	glUniform1f(rFLoc, x);
 	
 	const GLchar *gName = [@"greenF" UTF8String];
 	GLint gFLoc = glGetUniformLocation(passThroughProgram, gName);
-	glUniform1f(gFLoc, 1.0);
+	glUniform1f(gFLoc, y);
 	
 	const GLchar *bName = [@"blueF" UTF8String];
 	GLint bFLoc = glGetUniformLocation(passThroughProgram, bName);
-	glUniform1f(bFLoc, 1.0);
+	glUniform1f(bFLoc, z);
 
 	
     // Update attribute values.

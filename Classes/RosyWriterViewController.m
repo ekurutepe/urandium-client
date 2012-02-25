@@ -50,6 +50,11 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AVCamUtilities.h"
 
+#define kTransitionDuration	0.75
+#define kUpdateFrequency 20  // Hz
+#define kFilteringFactor 0.05
+#define kNoReadingValue 999
+
 static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 @implementation RosyWriterViewController
@@ -173,6 +178,10 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	
 	[videoProcessor.captureSession addOutput:self.stillImageOutput];
 
+	
+	[motionManager release], motionManager = [[CMMotionManager alloc] init];
+	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kUpdateFrequency)];
+	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
 }
 
 - (void)cleanup
@@ -183,6 +192,8 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
     frameRateLabel = nil;
     dimensionsLabel = nil;
     typeLabel = nil;
+	
+	[motionManager release], motionManager = nil;
 	
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 	[notificationCenter removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -208,6 +219,20 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	[super viewWillAppear:animated];
 
 	timer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(updateLabels) userInfo:nil repeats:YES];
+	
+	oglView.x = 1.0;
+	oglView.y = 1.0; 
+	oglView.z = 1.0;
+//	[motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
+//							   withHandler:^(CMGyroData *gyroData, NSError *error) {
+//								   CMRotationRate rotate = gyroData.rotationRate;
+//								   
+//								   oglView.x = rotate.x;
+//								   oglView.y = rotate.y;
+//								   oglView.x = rotate.x;
+//								   
+//								   NSLog(@"%.2f, %.2f, %.2f", oglView.x, oglView.y, oglView.z);
+//							   }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -354,6 +379,39 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	// take photo
 	[self _captureStillImage];
 	
+}
+
+
+#pragma mark - inclination
+
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+    // Use a basic low-pass filter to only keep the gravity in the accelerometer values for the X and Y axes
+    accelerationX = acceleration.x * kFilteringFactor + accelerationX * (1.0 - kFilteringFactor);
+    accelerationY = acceleration.y * kFilteringFactor + accelerationY * (1.0 - kFilteringFactor);
+    accelerationZ = acceleration.z * kFilteringFactor + accelerationZ * (1.0 - kFilteringFactor);
+    
+    // keep the raw reading, to use during calibrations
+//	currentRawReading = atan2(accelerationY, accelerationX);
+    
+	CGFloat k = 50.0;
+
+	if (oglView.x <= 0) directionX = 1.0;
+	if (oglView.x >= 1) directionX = - 1.0;
+	oglView.x += directionX * ((accelerationX + 1) / 2) / k;
+	
+	if (oglView.y <= 0) directionY = 1.0;
+	if (oglView.y >= 1) directionY = - 1.0;
+	oglView.y += directionY * ((accelerationY + 1) / 2) / k;
+	
+	if (oglView.z <= 0) directionZ = 1.0;
+	if (oglView.z >= 1) directionZ = - 1.0;
+	oglView.z += directionZ * ((accelerationZ + 1) / 2) / k;
+	
+	NSLog(@"%.2f %.2f %.2f (%.2f %.2f %.2f)", oglView.x, oglView.y, oglView.z, accelerationX, accelerationY, accelerationZ);
+	
+//    float calibratedAngle = [self calibratedAngleFromAngle:currentRawReading];
+    
+//    [levelView updateToInclinationInRadians:calibratedAngle];
 }
 
 @end
