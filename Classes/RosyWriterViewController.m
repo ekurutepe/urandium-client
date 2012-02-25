@@ -182,6 +182,13 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	[motionManager release], motionManager = [[CMMotionManager alloc] init];
 	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kUpdateFrequency)];
 	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
+	
+	oglView.secondExposure = [UIImage imageNamed:@"s.png"];
+	
+	UIImageView *secondExposureView = [[UIImageView alloc] initWithImage:oglView.secondExposure];
+	secondExposureView.alpha = 0.2;
+	[previewView addSubview:secondExposureView];
+	[secondExposureView release];
 }
 
 - (void)cleanup

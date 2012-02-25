@@ -89,7 +89,6 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *recordButton;
 @property (nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
 
-
 - (IBAction)toggleRecording:(id)sender;
 
 @end

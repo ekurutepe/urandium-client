@@ -60,6 +60,7 @@ enum {
 @synthesize x;
 @synthesize y;
 @synthesize z;
+@synthesize secondExposure;
 
 + (Class)layerClass 
 {
@@ -236,7 +237,31 @@ enum {
     // Create a CVOpenGLESTexture from the CVImageBuffer
 	size_t frameWidth = CVPixelBufferGetWidth(pixelBuffer);
 	size_t frameHeight = CVPixelBufferGetHeight(pixelBuffer);
-    CVOpenGLESTextureRef texture = NULL;
+
+    
+//	CVOpenGLESTextureRef secondExpTexture = NULL;
+//	CVImageBufferRef secondImageBuffer = 
+//    CVReturn err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, 
+//                                                                videoTextureCache,
+//                                                                pixelBuffer,
+//                                                                NULL,
+//                                                                GL_TEXTURE_2D,
+//                                                                GL_RGBA,
+//                                                                frameWidth,
+//                                                                frameHeight,
+//                                                                GL_BGRA,
+//                                                                GL_UNSIGNED_BYTE,
+//                                                                0,
+//                                                                &texture);
+    
+
+	
+	
+	
+	
+	
+	
+	CVOpenGLESTextureRef texture = NULL;
     CVReturn err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, 
                                                                 videoTextureCache,
                                                                 pixelBuffer,

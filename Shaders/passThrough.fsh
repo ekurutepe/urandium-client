@@ -4,7 +4,10 @@ precision mediump float;
 #endif
 
 varying vec2 coordinate;
+//varying vec2 secondPicCoords;
+
 uniform sampler2D videoframe;
+//uniform sampler2D secondPic;
 
 uniform float redF;
 uniform float greenF;
@@ -17,7 +20,12 @@ void main()
 	float g = pic.g * greenF;
 	float b = pic.b * blueF;
 	
-	gl_FragColor = vec4(r,g,b,1.0);
+	vec4 rgb = vec4(r,g,b,1.0);
+	
+//	vec4 secondPicLayer = texture2D(secondPic, vec2(secondPicCoords));
+//	vec4 final = mix(rgb, secondPicLayer, .3);
+	
+	gl_FragColor = rgb;
 }
 
 

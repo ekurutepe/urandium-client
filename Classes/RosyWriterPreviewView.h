@@ -66,11 +66,14 @@
 	CGFloat x;
 	CGFloat y;
 	CGFloat z;
+	
+	UIImage *secondExposure;
 }
 
 @property (nonatomic, assign) CGFloat x;
 @property (nonatomic, assign) CGFloat y;
 @property (nonatomic, assign) CGFloat z;
+@property (nonatomic, retain) UIImage *secondExposure;
 
 - (void)displayPixelBuffer:(CVImageBufferRef)pixelBuffer;
 
