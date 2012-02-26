@@ -16,7 +16,7 @@
 }
 
 @property (nonatomic, retain) UIImage *image;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) UIImageView *imageView;
 
 
 - (id)initWithImage:(UIImage *)image;
