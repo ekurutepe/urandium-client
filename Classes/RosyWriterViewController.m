@@ -49,7 +49,8 @@
 #import "RosyWriterViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AVCamUtilities.h"
-#import "PhotoPreviewViewController.h"
+//#import "PhotoPreviewViewController.h"
+#import "FinalizePhudgeViewController.h"
 
 #define kTransitionDuration	0.75
 #define kUpdateFrequency 20  // Hz
@@ -234,6 +235,8 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 
 	timer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(updateLabels) userInfo:nil repeats:YES];
 	
@@ -378,7 +381,11 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 //			 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 
 			 UIImage *image = [[UIImage alloc] initWithData:imageData];
-			 PhotoPreviewViewController *previewController = [[PhotoPreviewViewController alloc] initWithImage:image];
+			 FinalizePhudgeViewController *previewController = [[FinalizePhudgeViewController alloc] 
+                                                                initWithNibName:nil bundle:nil];
+             
+             previewController.capturedImage = image;
+             
 			 [self.navigationController pushViewController:previewController animated:YES];
 			 [previewController release];
 			 

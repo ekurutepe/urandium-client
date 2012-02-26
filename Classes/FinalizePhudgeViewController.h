@@ -15,6 +15,9 @@
 @property (nonatomic, strong) UIImage * downloadedImage;
 
 
+- (void)               image: (UIImage *) image
+    didFinishSavingWithError: (NSError *) error
+                 contextInfo: (void *) contextInfo;
 
 - (IBAction) saveTapped:(id)sender;
 - (IBAction) facebookButtonTapped:(id)sender;

@@ -23,6 +23,7 @@
 - (IBAction) saveTapped:(id)sender
 {
     NSLog(@"%@", NSStringFromSelector(_cmd));
+    UIImageWriteToSavedPhotosAlbum(self.capturedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (IBAction) facebookButtonTapped:(id)sender
@@ -35,6 +36,24 @@
     NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 
+- (void)               image: (UIImage *) image
+    didFinishSavingWithError: (NSError *) error
+                 contextInfo: (void *) contextInfo
+{
+    if (error) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Phudged the Phudge"
+                                                         message:[error localizedFailureReason]
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles: nil];
+        [alert show];
+        [alert release];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,6 +61,18 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
+    if (self.capturedImage) {
+        self.imageView.image = self.capturedImage;
+    }
+
 }
 
 - (void)viewDidLoad

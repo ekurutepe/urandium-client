@@ -191,9 +191,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				87B0336314FA2D2F001708CE /* CFNetwork.framework */,
-				87B0336114FA2D23001708CE /* libz.dylib */,
-				87B0335F14FA2D1B001708CE /* SystemConfiguration.framework */,
 				955110CD14F9681F00907469 /* AVCamUtilities.h */,
 				955110CE14F9681F00907469 /* AVCamUtilities.m */,
 				AFC35FD913FEFC0A0043EAD6 /* Shaders */,
@@ -231,6 +228,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87B0336314FA2D2F001708CE /* CFNetwork.framework */,
+				87B0336114FA2D23001708CE /* libz.dylib */,
+				87B0335F14FA2D1B001708CE /* SystemConfiguration.framework */,
 				955110E414F9799F00907469 /* CoreMotion.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
