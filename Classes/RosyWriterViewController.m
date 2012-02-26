@@ -51,19 +51,29 @@
 #import "AVCamUtilities.h"
 //#import "PhotoPreviewViewController.h"
 #import "FinalizePhudgeViewController.h"
+#import "FJPhudgeServerInterface.h"
 
 #define kTransitionDuration	0.75
 #define kUpdateFrequency 20  // Hz
 #define kFilteringFactor 0.05
 #define kNoReadingValue 999
+#define kSecondExposureOpacity 0.5
 
 static inline double radians (double degrees) { return degrees * (M_PI / 180); }
+
+
+
+@interface RosyWriterViewController ()
+- (UIImage *)_mergeTopImage:(UIImage *)topImage bottomImage:(UIImage*) bottomImage;
+@end
+
 
 @implementation RosyWriterViewController
 
 @synthesize previewView;
 @synthesize recordButton;
 @synthesize stillImageOutput = _stillImageOutput;
+@synthesize secondImage = _secondImage;
 
 - (void)updateLabels
 {
@@ -177,13 +187,12 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
                                     AVVideoCodecJPEG, AVVideoCodecKey,
                                     nil];
     [self.stillImageOutput setOutputSettings:outputSettings];
+	[outputSettings release];
 	
 	[videoProcessor.captureSession addOutput:self.stillImageOutput];
 
 	
-	[motionManager release], motionManager = [[CMMotionManager alloc] init];
-	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kUpdateFrequency)];
-	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
+//	[motionManager release], motionManager = [[CMMotionManager alloc] init];
 	
 //	oglView.secondExposure = [UIImage imageNamed:@"s.png"];
 	
@@ -226,7 +235,17 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-    
+ 
+	self.recordButton.enabled = NO;
+	
+	[[FJPhudgeServerInterface sharedInterface] getImageWithBlock:^(UIImage *image) {
+		self.secondImage = image;
+		
+		self.recordButton.enabled = YES;
+		NSLog(@"got second image");
+	}];
+	
+
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
 	timer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(updateLabels) userInfo:nil repeats:YES];
@@ -244,6 +263,9 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 //								   
 //								   NSLog(@"%.2f, %.2f, %.2f", oglView.x, oglView.y, oglView.z);
 //							   }];
+	
+	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kUpdateFrequency)];
+	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -252,6 +274,9 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 	[timer invalidate];
 	timer = nil;
+
+	[[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+
 }
 
 - (void)dealloc 
@@ -346,11 +371,12 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 - (void)_captureStillImage
 {
-    AVCaptureConnection *stillImageConnection = [AVCamUtilities connectionWithMediaType:AVMediaTypeVideo 
+    AVCaptureConnection *stillImageConnection = [AVCamUtilities connectionWithMediaType:AVMediaTypeVideo
 																		fromConnections:[[self stillImageOutput] connections]];
 	//    if ([_stillImageOutput isVideoOrientationSupported])
 	//        [_stillImageOutput setVideoOrientation:orientation];
     
+	self.recordButton.enabled = NO;
     [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:stillImageConnection
                                                          completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, 
 																			 NSError *error) 
@@ -375,7 +401,11 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 			 FinalizePhudgeViewController *previewController = [[FinalizePhudgeViewController alloc] 
                                                                 initWithNibName:nil bundle:nil];
              
-             previewController.capturedImage = image;
+             previewController.capturedImage = [self _mergeTopImage:self.secondImage
+														bottomImage:image];
+			 
+			 // TODO: refactore downloadedImage to sth like original image
+			 previewController.downloadedImage = image;
              
 			 [self.navigationController pushViewController:previewController animated:YES];
 			 [previewController release];
@@ -407,7 +437,8 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 #pragma mark - inclination
 
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
     // Use a basic low-pass filter to only keep the gravity in the accelerometer values for the X and Y axes
     accelerationX = acceleration.x * kFilteringFactor + accelerationX * (1.0 - kFilteringFactor);
     accelerationY = acceleration.y * kFilteringFactor + accelerationY * (1.0 - kFilteringFactor);
@@ -430,11 +461,50 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	if (oglView.z >= 1) directionZ = - 1.0;
 	oglView.z += directionZ * ((accelerationZ + 1) / 2) / k;
 	
-	NSLog(@"%.2f %.2f %.2f (%.2f %.2f %.2f)", oglView.x, oglView.y, oglView.z, accelerationX, accelerationY, accelerationZ);
+//	NSLog(@"%.2f %.2f %.2f (%.2f %.2f %.2f)", oglView.x, oglView.y, oglView.z, accelerationX, accelerationY, accelerationZ);
 	
 //    float calibratedAngle = [self calibratedAngleFromAngle:currentRawReading];
     
 //    [levelView updateToInclinationInRadians:calibratedAngle];
+}
+
+
+#pragma mark - second exposure
+
+- (UIImage *)_mergeTopImage:(UIImage *)topImage bottomImage:(UIImage*) bottomImage
+{
+	// URL REF: http://iphoneincubator.com/blog/windows-views/image-processing-tricks
+	// URL REF: http://stackoverflow.com/questions/1309757/blend-two-uiimages?answertab=active#tab-top
+	// URL REF: http://www.waterworld.com.hk/en/blog/uigraphicsbeginimagecontext-and-retina-display
+	
+	int width = bottomImage.size.width;
+	int height = bottomImage.size.height;
+	
+	CGSize newSize = CGSizeMake(width, height);
+	static CGFloat scale = -1.0;
+	if (scale<0.0) {
+		UIScreen *screen = [UIScreen mainScreen];
+		if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 4.0) {
+			scale = [screen scale];
+		}
+		else {
+			scale = 0.0;    // Use the standard API
+		}
+	}
+	if (scale>0.0) {
+		UIGraphicsBeginImageContextWithOptions(newSize, NO, scale);
+	}
+	else {
+		UIGraphicsBeginImageContext(newSize);
+	}
+	
+	[bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+	[topImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height) blendMode:kCGBlendModeNormal alpha:kSecondExposureOpacity];
+	
+	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return newImage;
 }
 
 @end

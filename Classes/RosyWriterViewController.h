@@ -83,11 +83,14 @@
 	float directionX;
 	float directionY;
 	float directionZ;
+	
+	UIImage *_secondImage;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *previewView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *recordButton;
 @property (nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
+@property (nonatomic, retain) UIImage *secondImage;
 
 - (IBAction)toggleRecording:(id)sender;
 
