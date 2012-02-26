@@ -8,6 +8,8 @@
 
 #import "FinalizePhudgeViewController.h"
 
+#import "FJPhudgeServerInterface.h"
+
 
 
 @interface FinalizePhudgeViewController ()
@@ -25,6 +27,10 @@
 {
     NSLog(@"%@", NSStringFromSelector(_cmd));
     UIImageWriteToSavedPhotosAlbum(self.capturedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
+    [[FJPhudgeServerInterface sharedInterface] uploadImage:self.downloadedImage
+                                                  withType:FJPhudgerServerImageTypeRaw
+                                               andLocation:nil];
 }
 
 - (IBAction) facebookButtonTapped:(id)sender
