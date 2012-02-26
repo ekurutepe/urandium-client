@@ -22,6 +22,7 @@
 @synthesize capturedImage;
 @synthesize downloadedImage;
 @synthesize caption;
+@synthesize activity;
 
 - (IBAction) saveTapped:(id)sender
 {
@@ -31,6 +32,13 @@
     [[FJPhudgeServerInterface sharedInterface] uploadImage:self.downloadedImage
                                                   withType:FJPhudgerServerImageTypeRaw
                                                andLocation:nil];
+    
+    [[FJPhudgeServerInterface sharedInterface] uploadImage:self.capturedImage
+                                                  withType:FJPhudgerServerImageTypeFinal
+                                               andLocation:nil];
+    
+    [self.activity startAnimating];
+    
 }
 
 - (IBAction) facebookButtonTapped:(id)sender
@@ -47,6 +55,7 @@
     didFinishSavingWithError: (NSError *) error
                  contextInfo: (void *) contextInfo
 {
+    [self.activity stopAnimating];
     if (error) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Phudged the Phudge"
                                                          message:[error localizedFailureReason]
