@@ -54,6 +54,13 @@
 		87B0337E14FA35FC001708CE /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0337714FA35FC001708CE /* FBDialog.m */; };
 		87B0337F14FA35FC001708CE /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0337914FA35FC001708CE /* FBLoginDialog.m */; };
 		87B0338014FA35FC001708CE /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0337B14FA35FC001708CE /* FBRequest.m */; };
+		87B0339F14FA4C78001708CE /* btn-x2-facebook-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339814FA4C78001708CE /* btn-x2-facebook-pressed.png */; };
+		87B033A014FA4C78001708CE /* btn-x2-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339914FA4C78001708CE /* btn-x2-facebook.png */; };
+		87B033A114FA4C78001708CE /* btn-x2-save-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339A14FA4C78001708CE /* btn-x2-save-pressed.png */; };
+		87B033A214FA4C78001708CE /* btn-x2-save.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339B14FA4C78001708CE /* btn-x2-save.png */; };
+		87B033A314FA4C78001708CE /* btn-x2-saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339C14FA4C78001708CE /* btn-x2-saved.png */; };
+		87B033A414FA4C78001708CE /* btn-x2-tumblr-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339D14FA4C78001708CE /* btn-x2-tumblr-pressed.png */; };
+		87B033A514FA4C78001708CE /* btn-x2-tumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339E14FA4C78001708CE /* btn-x2-tumblr.png */; };
 		955110CF14F9681F00907469 /* AVCamUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 955110CE14F9681F00907469 /* AVCamUtilities.m */; };
 		955110E514F9799F00907469 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955110E414F9799F00907469 /* CoreMotion.framework */; };
 		955110ED14F98E6D00907469 /* s.png in Resources */ = {isa = PBXBuildFile; fileRef = 955110EC14F98E6D00907469 /* s.png */; };
@@ -153,6 +160,13 @@
 		87B0337914FA35FC001708CE /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
 		87B0337A14FA35FC001708CE /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
 		87B0337B14FA35FC001708CE /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
+		87B0339814FA4C78001708CE /* btn-x2-facebook-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-facebook-pressed.png"; sourceTree = "<group>"; };
+		87B0339914FA4C78001708CE /* btn-x2-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-facebook.png"; sourceTree = "<group>"; };
+		87B0339A14FA4C78001708CE /* btn-x2-save-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-save-pressed.png"; sourceTree = "<group>"; };
+		87B0339B14FA4C78001708CE /* btn-x2-save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-save.png"; sourceTree = "<group>"; };
+		87B0339C14FA4C78001708CE /* btn-x2-saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-saved.png"; sourceTree = "<group>"; };
+		87B0339D14FA4C78001708CE /* btn-x2-tumblr-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-tumblr-pressed.png"; sourceTree = "<group>"; };
+		87B0339E14FA4C78001708CE /* btn-x2-tumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-tumblr.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Phudge-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Phudge-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		955110CD14F9681F00907469 /* AVCamUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamUtilities.h; sourceTree = "<group>"; };
 		955110CE14F9681F00907469 /* AVCamUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamUtilities.m; sourceTree = "<group>"; };
@@ -230,6 +244,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				87B0339814FA4C78001708CE /* btn-x2-facebook-pressed.png */,
+				87B0339914FA4C78001708CE /* btn-x2-facebook.png */,
+				87B0339A14FA4C78001708CE /* btn-x2-save-pressed.png */,
+				87B0339B14FA4C78001708CE /* btn-x2-save.png */,
+				87B0339C14FA4C78001708CE /* btn-x2-saved.png */,
+				87B0339D14FA4C78001708CE /* btn-x2-tumblr-pressed.png */,
+				87B0339E14FA4C78001708CE /* btn-x2-tumblr.png */,
 				955110EC14F98E6D00907469 /* s.png */,
 				AF2A5BFE1434ED1F007EF597 /* MainWindow.xib */,
 				AF2A5C001434ED1F007EF597 /* RosyWriterViewController.xib */,
@@ -448,6 +469,13 @@
 				955110ED14F98E6D00907469 /* s.png in Resources */,
 				87B0331314FA2930001708CE /* FinalizePhudgeViewController.xib in Resources */,
 				87B0337D14FA35FC001708CE /* FBDialog.bundle in Resources */,
+				87B0339F14FA4C78001708CE /* btn-x2-facebook-pressed.png in Resources */,
+				87B033A014FA4C78001708CE /* btn-x2-facebook.png in Resources */,
+				87B033A114FA4C78001708CE /* btn-x2-save-pressed.png in Resources */,
+				87B033A214FA4C78001708CE /* btn-x2-save.png in Resources */,
+				87B033A314FA4C78001708CE /* btn-x2-saved.png in Resources */,
+				87B033A414FA4C78001708CE /* btn-x2-tumblr-pressed.png in Resources */,
+				87B033A514FA4C78001708CE /* btn-x2-tumblr.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
