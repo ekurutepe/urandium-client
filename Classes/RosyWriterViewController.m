@@ -77,7 +77,7 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 - (void)updateLabels
 {
-	if (shouldShowStats) {
+	if (NO) {
 		NSString *frameRateString = [NSString stringWithFormat:@"%.2f FPS ", [videoProcessor videoFrameRate]];
  		frameRateLabel.text = frameRateString;
  		[frameRateLabel setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.25]];
