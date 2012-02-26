@@ -24,6 +24,8 @@
 		955110CF14F9681F00907469 /* AVCamUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 955110CE14F9681F00907469 /* AVCamUtilities.m */; };
 		955110E514F9799F00907469 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955110E414F9799F00907469 /* CoreMotion.framework */; };
 		955110ED14F98E6D00907469 /* s.png in Resources */ = {isa = PBXBuildFile; fileRef = 955110EC14F98E6D00907469 /* s.png */; };
+		95ECCDF114FA28F80039770E /* PhotoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95ECCDEF14FA28F80039770E /* PhotoPreviewViewController.m */; };
+		95ECCDF214FA28F80039770E /* PhotoPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95ECCDF014FA28F80039770E /* PhotoPreviewViewController.xib */; };
 		AF2A5C021434ED1F007EF597 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2A5BFE1434ED1F007EF597 /* MainWindow.xib */; };
 		AF2A5C031434ED1F007EF597 /* RosyWriterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2A5C001434ED1F007EF597 /* RosyWriterViewController.xib */; };
 		AF928C10140C2AD300844BAD /* ShaderUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = AF928C0E140C2AD300844BAD /* ShaderUtilities.c */; };
@@ -57,6 +59,9 @@
 		955110CE14F9681F00907469 /* AVCamUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamUtilities.m; sourceTree = "<group>"; };
 		955110E414F9799F00907469 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		955110EC14F98E6D00907469 /* s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s.png; sourceTree = "<group>"; };
+		95ECCDEE14FA28F80039770E /* PhotoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoPreviewViewController.h; path = Classes/PhotoPreviewViewController.h; sourceTree = "<group>"; };
+		95ECCDEF14FA28F80039770E /* PhotoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoPreviewViewController.m; path = Classes/PhotoPreviewViewController.m; sourceTree = "<group>"; };
+		95ECCDF014FA28F80039770E /* PhotoPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoPreviewViewController.xib; path = Classes/PhotoPreviewViewController.xib; sourceTree = "<group>"; };
 		AF2A5BFF1434ED1F007EF597 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		AF2A5C011434ED1F007EF597 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RosyWriterViewController.xib; sourceTree = "<group>"; };
 		AF928C0E140C2AD300844BAD /* ShaderUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ShaderUtilities.c; path = Classes/ShaderUtilities.c; sourceTree = "<group>"; };
@@ -159,6 +164,9 @@
 				AFC35FE713FF35900043EAD6 /* RosyWriterVideoProcessor.m */,
 				289233A80DB2D0DB0083E9F9 /* RosyWriterViewController.h */,
 				289233A90DB2D0DB0083E9F9 /* RosyWriterViewController.m */,
+				95ECCDEE14FA28F80039770E /* PhotoPreviewViewController.h */,
+				95ECCDEF14FA28F80039770E /* PhotoPreviewViewController.m */,
+				95ECCDF014FA28F80039770E /* PhotoPreviewViewController.xib */,
 				26B0755713981396003A24D9 /* RosyWriterPreviewView.h */,
 				26B0755813981396003A24D9 /* RosyWriterPreviewView.m */,
 				1D3623240D0F684500981E51 /* RosyWriterAppDelegate.h */,
@@ -234,6 +242,7 @@
 				AF2A5C021434ED1F007EF597 /* MainWindow.xib in Resources */,
 				AF2A5C031434ED1F007EF597 /* RosyWriterViewController.xib in Resources */,
 				955110ED14F98E6D00907469 /* s.png in Resources */,
+				95ECCDF214FA28F80039770E /* PhotoPreviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +260,7 @@
 				AFC35FE813FF35900043EAD6 /* RosyWriterVideoProcessor.m in Sources */,
 				AF928C10140C2AD300844BAD /* ShaderUtilities.c in Sources */,
 				955110CF14F9681F00907469 /* AVCamUtilities.m in Sources */,
+				95ECCDF114FA28F80039770E /* PhotoPreviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

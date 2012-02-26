@@ -49,6 +49,7 @@
 #import "RosyWriterViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AVCamUtilities.h"
+#import "PhotoPreviewViewController.h"
 
 #define kTransitionDuration	0.75
 #define kUpdateFrequency 20  // Hz
@@ -183,12 +184,12 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kUpdateFrequency)];
 	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
 	
-	oglView.secondExposure = [UIImage imageNamed:@"s.png"];
+//	oglView.secondExposure = [UIImage imageNamed:@"s.png"];
 	
-	UIImageView *secondExposureView = [[UIImageView alloc] initWithImage:oglView.secondExposure];
-	secondExposureView.alpha = 0.2;
-	[previewView addSubview:secondExposureView];
-	[secondExposureView release];
+//	UIImageView *secondExposureView = [[UIImageView alloc] initWithImage:oglView.secondExposure];
+//	secondExposureView.alpha = 0.2;
+//	[previewView addSubview:secondExposureView];
+//	[secondExposureView release];
 }
 
 - (void)cleanup
@@ -361,16 +362,24 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 		 };
 		 
 		 if (imageDataSampleBuffer != NULL) {
-			 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-			 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 			 
+			 
+			 
+			 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+//			 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+
 			 UIImage *image = [[UIImage alloc] initWithData:imageData];
-			 [library writeImageToSavedPhotosAlbum:[image CGImage]
-									   orientation:(ALAssetOrientation)[image imageOrientation]
-								   completionBlock:completionBlock];
+			 PhotoPreviewViewController *previewController = [[PhotoPreviewViewController alloc] initWithImage:image];
+			 [self.navigationController pushViewController:previewController animated:YES];
+			 [previewController release];
+			 
+//			 
+//			 [library writeImageToSavedPhotosAlbum:[image CGImage]
+//									   orientation:(ALAssetOrientation)[image imageOrientation]
+//								   completionBlock:completionBlock];
 			 [image release];
 			 
-			 [library release];
+//			 [library release];
 		 }
 		 else
 			 completionBlock(nil, error);
