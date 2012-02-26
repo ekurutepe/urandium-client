@@ -53,7 +53,7 @@
 
 @synthesize window;
 @synthesize mainViewController;
-
+@synthesize navigationController = _navigationController;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -63,7 +63,9 @@
     // Override point for customization after application launch.
 	
 	// Set the main view controller as the window's root view controller and display.
-    self.window.rootViewController = self.mainViewController;
+    self.window.rootViewController = self.navigationController;
+//	[self.navigationController pushViewController:self.mainViewController
+//										 animated:NO];
     [self.window makeKeyAndVisible];
 
     return YES;

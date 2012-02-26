@@ -52,10 +52,13 @@
 @interface RosyWriterAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     RosyWriterViewController *mainViewController;
+	
+	UINavigationController *_navigationController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet RosyWriterViewController *mainViewController;
+@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 @end
 
