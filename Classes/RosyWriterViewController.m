@@ -51,12 +51,13 @@
 #import "AVCamUtilities.h"
 //#import "PhotoPreviewViewController.h"
 #import "FinalizePhudgeViewController.h"
+#import "FJPhudgeServerInterface.h"
 
 #define kTransitionDuration	0.75
 #define kUpdateFrequency 20  // Hz
 #define kFilteringFactor 0.05
 #define kNoReadingValue 999
-#define kSecondExposureOpacity 0.3
+#define kSecondExposureOpacity 0.5
 
 static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
@@ -72,6 +73,7 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 @synthesize previewView;
 @synthesize recordButton;
 @synthesize stillImageOutput = _stillImageOutput;
+@synthesize secondImage = _secondImage;
 
 - (void)updateLabels
 {
@@ -235,7 +237,13 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-    
+ 
+	[[FJPhudgeServerInterface sharedInterface] getImageWithBlock:^(UIImage *image) {
+		self.secondImage = image;
+		NSLog(@"got second image");
+	}];
+	
+
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
 	timer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(updateLabels) userInfo:nil repeats:YES];
@@ -384,7 +392,11 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 			 FinalizePhudgeViewController *previewController = [[FinalizePhudgeViewController alloc] 
                                                                 initWithNibName:nil bundle:nil];
              
-             previewController.capturedImage = image;
+             previewController.capturedImage = [self _mergeTopImage:self.secondImage
+														bottomImage:image];
+			 
+			 // TODO: refactore downloadedImage to sth like original image
+			 previewController.downloadedImage = image;
              
 			 [self.navigationController pushViewController:previewController animated:YES];
 			 [previewController release];
@@ -416,7 +428,8 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 #pragma mark - inclination
 
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
     // Use a basic low-pass filter to only keep the gravity in the accelerometer values for the X and Y axes
     accelerationX = acceleration.x * kFilteringFactor + accelerationX * (1.0 - kFilteringFactor);
     accelerationY = acceleration.y * kFilteringFactor + accelerationY * (1.0 - kFilteringFactor);
@@ -439,7 +452,7 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	if (oglView.z >= 1) directionZ = - 1.0;
 	oglView.z += directionZ * ((accelerationZ + 1) / 2) / k;
 	
-	NSLog(@"%.2f %.2f %.2f (%.2f %.2f %.2f)", oglView.x, oglView.y, oglView.z, accelerationX, accelerationY, accelerationZ);
+//	NSLog(@"%.2f %.2f %.2f (%.2f %.2f %.2f)", oglView.x, oglView.y, oglView.z, accelerationX, accelerationY, accelerationZ);
 	
 //    float calibratedAngle = [self calibratedAngleFromAngle:currentRawReading];
     
