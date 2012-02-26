@@ -19,6 +19,7 @@
 @synthesize imageView;
 @synthesize capturedImage;
 @synthesize downloadedImage;
+@synthesize caption;
 
 - (IBAction) saveTapped:(id)sender
 {

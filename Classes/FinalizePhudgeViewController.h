@@ -13,6 +13,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView * imageView;
 @property (nonatomic, strong) UIImage * capturedImage;
 @property (nonatomic, strong) UIImage * downloadedImage;
+@property (nonatomic, strong) NSString * caption;
 
 
 - (void)               image: (UIImage *) image
