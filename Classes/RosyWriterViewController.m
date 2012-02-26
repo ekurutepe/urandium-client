@@ -192,9 +192,7 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	[videoProcessor.captureSession addOutput:self.stillImageOutput];
 
 	
-	[motionManager release], motionManager = [[CMMotionManager alloc] init];
-	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kUpdateFrequency)];
-	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
+//	[motionManager release], motionManager = [[CMMotionManager alloc] init];
 	
 //	oglView.secondExposure = [UIImage imageNamed:@"s.png"];
 	
@@ -238,8 +236,12 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 {
 	[super viewWillAppear:animated];
  
+	self.recordButton.enabled = NO;
+	
 	[[FJPhudgeServerInterface sharedInterface] getImageWithBlock:^(UIImage *image) {
 		self.secondImage = image;
+		
+		self.recordButton.enabled = YES;
 		NSLog(@"got second image");
 	}];
 	
@@ -261,6 +263,9 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 //								   
 //								   NSLog(@"%.2f, %.2f, %.2f", oglView.x, oglView.y, oglView.z);
 //							   }];
+	
+	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kUpdateFrequency)];
+	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -269,6 +274,9 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 	[timer invalidate];
 	timer = nil;
+
+	[[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+
 }
 
 - (void)dealloc 
@@ -368,6 +376,7 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	//    if ([_stillImageOutput isVideoOrientationSupported])
 	//        [_stillImageOutput setVideoOrientation:orientation];
     
+	self.recordButton.enabled = NO;
     [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:stillImageConnection
                                                          completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, 
 																			 NSError *error) 
