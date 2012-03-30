@@ -21,6 +21,12 @@
 		26DC173912FA5289004340D7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DC173812FA5289004340D7 /* MobileCoreServices.framework */; };
 		288765590DF743DE002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765580DF743DE002DB57D /* CoreGraphics.framework */; };
 		289233AE0DB2D0DB0083E9F9 /* RosyWriterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289233A90DB2D0DB0083E9F9 /* RosyWriterViewController.m */; };
+		870046B21525E3F800ECD37B /* ASIS3Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046A61525E15A00ECD37B /* ASIS3Bucket.m */; };
+		870046B31525E3F800ECD37B /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046A81525E15A00ECD37B /* ASIS3BucketObject.m */; };
+		870046B41525E3F800ECD37B /* ASIS3BucketRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046AA1525E15A00ECD37B /* ASIS3BucketRequest.m */; };
+		870046B51525E3F800ECD37B /* ASIS3ObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046AC1525E15A00ECD37B /* ASIS3ObjectRequest.m */; };
+		870046B61525E3F800ECD37B /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046AE1525E15A00ECD37B /* ASIS3Request.m */; };
+		870046B71525E3F800ECD37B /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046B01525E15A00ECD37B /* ASIS3ServiceRequest.m */; };
 		87B0331214FA2930001708CE /* FinalizePhudgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0331014FA2930001708CE /* FinalizePhudgeViewController.m */; };
 		87B0331314FA2930001708CE /* FinalizePhudgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87B0331114FA2930001708CE /* FinalizePhudgeViewController.xib */; };
 		87B0334614FA2C9F001708CE /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0332E14FA2C9F001708CE /* NSObject+SBJson.m */; };
@@ -92,6 +98,19 @@
 		289233A90DB2D0DB0083E9F9 /* RosyWriterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RosyWriterViewController.m; path = Classes/RosyWriterViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* RosyWriter_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosyWriter_Prefix.pch; sourceTree = "<group>"; };
+		870046A41525E15A00ECD37B /* ASINSXMLParserCompat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASINSXMLParserCompat.h; sourceTree = "<group>"; };
+		870046A51525E15A00ECD37B /* ASIS3Bucket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3Bucket.h; sourceTree = "<group>"; };
+		870046A61525E15A00ECD37B /* ASIS3Bucket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3Bucket.m; sourceTree = "<group>"; };
+		870046A71525E15A00ECD37B /* ASIS3BucketObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3BucketObject.h; sourceTree = "<group>"; };
+		870046A81525E15A00ECD37B /* ASIS3BucketObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3BucketObject.m; sourceTree = "<group>"; };
+		870046A91525E15A00ECD37B /* ASIS3BucketRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3BucketRequest.h; sourceTree = "<group>"; };
+		870046AA1525E15A00ECD37B /* ASIS3BucketRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3BucketRequest.m; sourceTree = "<group>"; };
+		870046AB1525E15A00ECD37B /* ASIS3ObjectRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3ObjectRequest.h; sourceTree = "<group>"; };
+		870046AC1525E15A00ECD37B /* ASIS3ObjectRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3ObjectRequest.m; sourceTree = "<group>"; };
+		870046AD1525E15A00ECD37B /* ASIS3Request.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3Request.h; sourceTree = "<group>"; };
+		870046AE1525E15A00ECD37B /* ASIS3Request.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3Request.m; sourceTree = "<group>"; };
+		870046AF1525E15A00ECD37B /* ASIS3ServiceRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3ServiceRequest.h; sourceTree = "<group>"; };
+		870046B01525E15A00ECD37B /* ASIS3ServiceRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3ServiceRequest.m; sourceTree = "<group>"; };
 		87B0330F14FA2930001708CE /* FinalizePhudgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FinalizePhudgeViewController.h; path = Classes/FinalizePhudgeViewController.h; sourceTree = "<group>"; };
 		87B0331014FA2930001708CE /* FinalizePhudgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FinalizePhudgeViewController.m; path = Classes/FinalizePhudgeViewController.m; sourceTree = "<group>"; };
 		87B0331114FA2930001708CE /* FinalizePhudgeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FinalizePhudgeViewController.xib; path = Classes/FinalizePhudgeViewController.xib; sourceTree = "<group>"; };
@@ -307,6 +326,19 @@
 		87B0332B14FA2C82001708CE /* ASI */ = {
 			isa = PBXGroup;
 			children = (
+				870046A41525E15A00ECD37B /* ASINSXMLParserCompat.h */,
+				870046A51525E15A00ECD37B /* ASIS3Bucket.h */,
+				870046A61525E15A00ECD37B /* ASIS3Bucket.m */,
+				870046A71525E15A00ECD37B /* ASIS3BucketObject.h */,
+				870046A81525E15A00ECD37B /* ASIS3BucketObject.m */,
+				870046A91525E15A00ECD37B /* ASIS3BucketRequest.h */,
+				870046AA1525E15A00ECD37B /* ASIS3BucketRequest.m */,
+				870046AB1525E15A00ECD37B /* ASIS3ObjectRequest.h */,
+				870046AC1525E15A00ECD37B /* ASIS3ObjectRequest.m */,
+				870046AD1525E15A00ECD37B /* ASIS3Request.h */,
+				870046AE1525E15A00ECD37B /* ASIS3Request.m */,
+				870046AF1525E15A00ECD37B /* ASIS3ServiceRequest.h */,
+				870046B01525E15A00ECD37B /* ASIS3ServiceRequest.m */,
 				87B0331514FA2C7A001708CE /* Reachability.h */,
 				87B0331614FA2C7A001708CE /* Reachability.m */,
 				87B0331714FA2C7A001708CE /* ASIAuthenticationDialog.h */,
@@ -521,6 +553,12 @@
 				87B0337E14FA35FC001708CE /* FBDialog.m in Sources */,
 				87B0337F14FA35FC001708CE /* FBLoginDialog.m in Sources */,
 				87B0338014FA35FC001708CE /* FBRequest.m in Sources */,
+				870046B21525E3F800ECD37B /* ASIS3Bucket.m in Sources */,
+				870046B31525E3F800ECD37B /* ASIS3BucketObject.m in Sources */,
+				870046B41525E3F800ECD37B /* ASIS3BucketRequest.m in Sources */,
+				870046B51525E3F800ECD37B /* ASIS3ObjectRequest.m in Sources */,
+				870046B61525E3F800ECD37B /* ASIS3Request.m in Sources */,
+				870046B71525E3F800ECD37B /* ASIS3ServiceRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
