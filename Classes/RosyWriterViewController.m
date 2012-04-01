@@ -66,7 +66,7 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 @interface RosyWriterViewController ()
 - (UIImage *)_mergeTopImage:(UIImage *)topImage bottomImage:(UIImage*) bottomImage;
-- (void)_gotoPreviewWithImage:(UIImage *)image;
+- (void)_gotoPreviewWithOriginalImage:(UIImage *)image filteredImage:(UIImage *)filteredImage;
 @end
 
 
@@ -391,28 +391,37 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 		 
 		 if (imageDataSampleBuffer != NULL) {
 			 
-			 [videoProcessor captureOutput:[self stillImageOutput]
-					 didOutputSampleBuffer:imageDataSampleBuffer
-							fromConnection:stillImageConnection];
-			 
-			 UIImage *image = [oglView imageFromFramebuffer];
-			 UIImage *rotatedImage = [image imageRotatedByDegrees:90];
-			 UIImage *flippedImage = [UIImage imageWithCGImage:rotatedImage.CGImage 
-														 scale:1.0 
-												   orientation:UIImageOrientationUpMirrored];
+			 @autoreleasepool {
+				 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+				 
+				 UIImage *originalImage = [[UIImage alloc] initWithData:imageData];
+				 
+				 [videoProcessor captureOutput:[self stillImageOutput]
+						 didOutputSampleBuffer:imageDataSampleBuffer
+								fromConnection:stillImageConnection];
 
-			 [self _gotoPreviewWithImage:flippedImage];
+				 UIImage *image = [oglView imageFromFramebuffer];
+				 UIImage *rotatedImage = [image imageRotatedByDegrees:90];
+				 
+				 UIImage *flippedImage = [[UIImage alloc] initWithCGImage:rotatedImage.CGImage 
+																	scale:1.0 
+															  orientation:UIImageOrientationUpMirrored];
+				 [self _gotoPreviewWithOriginalImage:originalImage
+									   filteredImage:flippedImage];
+				 [originalImage release];
+				 [flippedImage release];
+			 }
 		 }
 		 else
 			 completionBlock(nil, error);
 	 }];
 }
 
+
 - (void)_handleShutterButtonTap:(UIButton *)shutterButton
 {
 	// take photo
 	[self _captureStillImage];
-	
 }
 
 
@@ -422,22 +431,19 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 }
 
 
-- (void)_gotoPreviewWithImage:(UIImage *)image
+- (void)_gotoPreviewWithOriginalImage:(UIImage *)originalImage filteredImage:(UIImage *)filteredImage
 {	
 	FinalizePhudgeViewController *previewController = [[FinalizePhudgeViewController alloc] 
 													   initWithNibName:nil bundle:nil];
 	
 	previewController.capturedImage = [self _mergeTopImage:self.secondImage
-											   bottomImage:image];
+											   bottomImage:filteredImage];
 	
 	// TODO: refactore downloadedImage to sth like original image
-	previewController.downloadedImage = image;
+	previewController.downloadedImage = originalImage;
 	
 	[self.navigationController pushViewController:previewController animated:YES];
 	[previewController release];
-	
-	[image release];
-
 }
 
 #pragma mark - inclination
