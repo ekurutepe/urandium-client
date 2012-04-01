@@ -485,6 +485,7 @@
 	 * Create capture session
 	 */
     captureSession = [[AVCaptureSession alloc] init];
+	[captureSession setSessionPreset:AVCaptureSessionPresetPhoto];
     
     /*
 	 * Create audio connection
