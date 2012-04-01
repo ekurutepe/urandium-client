@@ -64,6 +64,7 @@
 	
 	// Set the main view controller as the window's root view controller and display.
     self.window.rootViewController = self.navigationController;
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
 //	[self.navigationController pushViewController:self.mainViewController
 //										 animated:NO];
     [self.window makeKeyAndVisible];

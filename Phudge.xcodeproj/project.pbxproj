@@ -21,6 +21,12 @@
 		26DC173912FA5289004340D7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26DC173812FA5289004340D7 /* MobileCoreServices.framework */; };
 		288765590DF743DE002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765580DF743DE002DB57D /* CoreGraphics.framework */; };
 		289233AE0DB2D0DB0083E9F9 /* RosyWriterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289233A90DB2D0DB0083E9F9 /* RosyWriterViewController.m */; };
+		870046B21525E3F800ECD37B /* ASIS3Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046A61525E15A00ECD37B /* ASIS3Bucket.m */; };
+		870046B31525E3F800ECD37B /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046A81525E15A00ECD37B /* ASIS3BucketObject.m */; };
+		870046B41525E3F800ECD37B /* ASIS3BucketRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046AA1525E15A00ECD37B /* ASIS3BucketRequest.m */; };
+		870046B51525E3F800ECD37B /* ASIS3ObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046AC1525E15A00ECD37B /* ASIS3ObjectRequest.m */; };
+		870046B61525E3F800ECD37B /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046AE1525E15A00ECD37B /* ASIS3Request.m */; };
+		870046B71525E3F800ECD37B /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 870046B01525E15A00ECD37B /* ASIS3ServiceRequest.m */; };
 		87B0331214FA2930001708CE /* FinalizePhudgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0331014FA2930001708CE /* FinalizePhudgeViewController.m */; };
 		87B0331314FA2930001708CE /* FinalizePhudgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87B0331114FA2930001708CE /* FinalizePhudgeViewController.xib */; };
 		87B0334614FA2C9F001708CE /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0332E14FA2C9F001708CE /* NSObject+SBJson.m */; };
@@ -48,10 +54,22 @@
 		87B0336014FA2D1B001708CE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87B0335F14FA2D1B001708CE /* SystemConfiguration.framework */; };
 		87B0336214FA2D23001708CE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 87B0336114FA2D23001708CE /* libz.dylib */; };
 		87B0336414FA2D2F001708CE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87B0336314FA2D2F001708CE /* CFNetwork.framework */; };
+		87B0337014FA35BB001708CE /* FJPhudgeFacebookInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0336F14FA35BB001708CE /* FJPhudgeFacebookInterface.m */; };
+		87B0337C14FA35FC001708CE /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0337314FA35FC001708CE /* Facebook.m */; };
+		87B0337D14FA35FC001708CE /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 87B0337514FA35FC001708CE /* FBDialog.bundle */; };
+		87B0337E14FA35FC001708CE /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0337714FA35FC001708CE /* FBDialog.m */; };
+		87B0337F14FA35FC001708CE /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0337914FA35FC001708CE /* FBLoginDialog.m */; };
+		87B0338014FA35FC001708CE /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B0337B14FA35FC001708CE /* FBRequest.m */; };
+		87B0339F14FA4C78001708CE /* btn-x2-facebook-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339814FA4C78001708CE /* btn-x2-facebook-pressed.png */; };
+		87B033A014FA4C78001708CE /* btn-x2-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339914FA4C78001708CE /* btn-x2-facebook.png */; };
+		87B033A114FA4C78001708CE /* btn-x2-save-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339A14FA4C78001708CE /* btn-x2-save-pressed.png */; };
+		87B033A214FA4C78001708CE /* btn-x2-save.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339B14FA4C78001708CE /* btn-x2-save.png */; };
+		87B033A314FA4C78001708CE /* btn-x2-saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339C14FA4C78001708CE /* btn-x2-saved.png */; };
+		87B033A414FA4C78001708CE /* btn-x2-tumblr-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339D14FA4C78001708CE /* btn-x2-tumblr-pressed.png */; };
+		87B033A514FA4C78001708CE /* btn-x2-tumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B0339E14FA4C78001708CE /* btn-x2-tumblr.png */; };
 		955110CF14F9681F00907469 /* AVCamUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 955110CE14F9681F00907469 /* AVCamUtilities.m */; };
 		955110E514F9799F00907469 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955110E414F9799F00907469 /* CoreMotion.framework */; };
 		955110ED14F98E6D00907469 /* s.png in Resources */ = {isa = PBXBuildFile; fileRef = 955110EC14F98E6D00907469 /* s.png */; };
-		95ECCDF114FA28F80039770E /* PhotoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95ECCDEF14FA28F80039770E /* PhotoPreviewViewController.m */; };
 		AF2A5C021434ED1F007EF597 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2A5BFE1434ED1F007EF597 /* MainWindow.xib */; };
 		AF2A5C031434ED1F007EF597 /* RosyWriterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2A5C001434ED1F007EF597 /* RosyWriterViewController.xib */; };
 		AF928C10140C2AD300844BAD /* ShaderUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = AF928C0E140C2AD300844BAD /* ShaderUtilities.c */; };
@@ -80,6 +98,19 @@
 		289233A90DB2D0DB0083E9F9 /* RosyWriterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RosyWriterViewController.m; path = Classes/RosyWriterViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* RosyWriter_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosyWriter_Prefix.pch; sourceTree = "<group>"; };
+		870046A41525E15A00ECD37B /* ASINSXMLParserCompat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASINSXMLParserCompat.h; sourceTree = "<group>"; };
+		870046A51525E15A00ECD37B /* ASIS3Bucket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3Bucket.h; sourceTree = "<group>"; };
+		870046A61525E15A00ECD37B /* ASIS3Bucket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3Bucket.m; sourceTree = "<group>"; };
+		870046A71525E15A00ECD37B /* ASIS3BucketObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3BucketObject.h; sourceTree = "<group>"; };
+		870046A81525E15A00ECD37B /* ASIS3BucketObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3BucketObject.m; sourceTree = "<group>"; };
+		870046A91525E15A00ECD37B /* ASIS3BucketRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3BucketRequest.h; sourceTree = "<group>"; };
+		870046AA1525E15A00ECD37B /* ASIS3BucketRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3BucketRequest.m; sourceTree = "<group>"; };
+		870046AB1525E15A00ECD37B /* ASIS3ObjectRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3ObjectRequest.h; sourceTree = "<group>"; };
+		870046AC1525E15A00ECD37B /* ASIS3ObjectRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3ObjectRequest.m; sourceTree = "<group>"; };
+		870046AD1525E15A00ECD37B /* ASIS3Request.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3Request.h; sourceTree = "<group>"; };
+		870046AE1525E15A00ECD37B /* ASIS3Request.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3Request.m; sourceTree = "<group>"; };
+		870046AF1525E15A00ECD37B /* ASIS3ServiceRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASIS3ServiceRequest.h; sourceTree = "<group>"; };
+		870046B01525E15A00ECD37B /* ASIS3ServiceRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASIS3ServiceRequest.m; sourceTree = "<group>"; };
 		87B0330F14FA2930001708CE /* FinalizePhudgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FinalizePhudgeViewController.h; path = Classes/FinalizePhudgeViewController.h; sourceTree = "<group>"; };
 		87B0331014FA2930001708CE /* FinalizePhudgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FinalizePhudgeViewController.m; path = Classes/FinalizePhudgeViewController.m; sourceTree = "<group>"; };
 		87B0331114FA2930001708CE /* FinalizePhudgeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FinalizePhudgeViewController.xib; path = Classes/FinalizePhudgeViewController.xib; sourceTree = "<group>"; };
@@ -136,14 +167,30 @@
 		87B0335F14FA2D1B001708CE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		87B0336114FA2D23001708CE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		87B0336314FA2D2F001708CE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		87B0336E14FA35BB001708CE /* FJPhudgeFacebookInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FJPhudgeFacebookInterface.h; sourceTree = "<group>"; };
+		87B0336F14FA35BB001708CE /* FJPhudgeFacebookInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FJPhudgeFacebookInterface.m; sourceTree = "<group>"; };
+		87B0337214FA35FC001708CE /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
+		87B0337314FA35FC001708CE /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
+		87B0337414FA35FC001708CE /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
+		87B0337514FA35FC001708CE /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
+		87B0337614FA35FC001708CE /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
+		87B0337714FA35FC001708CE /* FBDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDialog.m; sourceTree = "<group>"; };
+		87B0337814FA35FC001708CE /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
+		87B0337914FA35FC001708CE /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
+		87B0337A14FA35FC001708CE /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
+		87B0337B14FA35FC001708CE /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
+		87B0339814FA4C78001708CE /* btn-x2-facebook-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-facebook-pressed.png"; sourceTree = "<group>"; };
+		87B0339914FA4C78001708CE /* btn-x2-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-facebook.png"; sourceTree = "<group>"; };
+		87B0339A14FA4C78001708CE /* btn-x2-save-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-save-pressed.png"; sourceTree = "<group>"; };
+		87B0339B14FA4C78001708CE /* btn-x2-save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-save.png"; sourceTree = "<group>"; };
+		87B0339C14FA4C78001708CE /* btn-x2-saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-saved.png"; sourceTree = "<group>"; };
+		87B0339D14FA4C78001708CE /* btn-x2-tumblr-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-tumblr-pressed.png"; sourceTree = "<group>"; };
+		87B0339E14FA4C78001708CE /* btn-x2-tumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-x2-tumblr.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Phudge-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Phudge-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		955110CD14F9681F00907469 /* AVCamUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamUtilities.h; sourceTree = "<group>"; };
 		955110CE14F9681F00907469 /* AVCamUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamUtilities.m; sourceTree = "<group>"; };
 		955110E414F9799F00907469 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		955110EC14F98E6D00907469 /* s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s.png; sourceTree = "<group>"; };
-		95ECCDEE14FA28F80039770E /* PhotoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoPreviewViewController.h; path = Classes/PhotoPreviewViewController.h; sourceTree = "<group>"; };
-		95ECCDEF14FA28F80039770E /* PhotoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoPreviewViewController.m; path = Classes/PhotoPreviewViewController.m; sourceTree = "<group>"; };
-		95ECCDF014FA28F80039770E /* PhotoPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoPreviewViewController.xib; path = Classes/PhotoPreviewViewController.xib; sourceTree = "<group>"; };
 		AF2A5BFF1434ED1F007EF597 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		AF2A5C011434ED1F007EF597 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RosyWriterViewController.xib; sourceTree = "<group>"; };
 		AF928C0E140C2AD300844BAD /* ShaderUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ShaderUtilities.c; path = Classes/ShaderUtilities.c; sourceTree = "<group>"; };
@@ -216,6 +263,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				87B0339814FA4C78001708CE /* btn-x2-facebook-pressed.png */,
+				87B0339914FA4C78001708CE /* btn-x2-facebook.png */,
+				87B0339A14FA4C78001708CE /* btn-x2-save-pressed.png */,
+				87B0339B14FA4C78001708CE /* btn-x2-save.png */,
+				87B0339C14FA4C78001708CE /* btn-x2-saved.png */,
+				87B0339D14FA4C78001708CE /* btn-x2-tumblr-pressed.png */,
+				87B0339E14FA4C78001708CE /* btn-x2-tumblr.png */,
 				955110EC14F98E6D00907469 /* s.png */,
 				AF2A5BFE1434ED1F007EF597 /* MainWindow.xib */,
 				AF2A5C001434ED1F007EF597 /* RosyWriterViewController.xib */,
@@ -258,6 +312,9 @@
 		87B0331414FA2C66001708CE /* Server Interface */ = {
 			isa = PBXGroup;
 			children = (
+				87B0336E14FA35BB001708CE /* FJPhudgeFacebookInterface.h */,
+				87B0336F14FA35BB001708CE /* FJPhudgeFacebookInterface.m */,
+				87B0337114FA35D8001708CE /* Facebook */,
 				87B0335314FA2CCD001708CE /* FJPhudgeServerInterface.h */,
 				87B0335414FA2CCD001708CE /* FJPhudgeServerInterface.m */,
 				87B0335214FA2CA7001708CE /* JSON */,
@@ -269,6 +326,19 @@
 		87B0332B14FA2C82001708CE /* ASI */ = {
 			isa = PBXGroup;
 			children = (
+				870046A41525E15A00ECD37B /* ASINSXMLParserCompat.h */,
+				870046A51525E15A00ECD37B /* ASIS3Bucket.h */,
+				870046A61525E15A00ECD37B /* ASIS3Bucket.m */,
+				870046A71525E15A00ECD37B /* ASIS3BucketObject.h */,
+				870046A81525E15A00ECD37B /* ASIS3BucketObject.m */,
+				870046A91525E15A00ECD37B /* ASIS3BucketRequest.h */,
+				870046AA1525E15A00ECD37B /* ASIS3BucketRequest.m */,
+				870046AB1525E15A00ECD37B /* ASIS3ObjectRequest.h */,
+				870046AC1525E15A00ECD37B /* ASIS3ObjectRequest.m */,
+				870046AD1525E15A00ECD37B /* ASIS3Request.h */,
+				870046AE1525E15A00ECD37B /* ASIS3Request.m */,
+				870046AF1525E15A00ECD37B /* ASIS3ServiceRequest.h */,
+				870046B01525E15A00ECD37B /* ASIS3ServiceRequest.m */,
 				87B0331514FA2C7A001708CE /* Reachability.h */,
 				87B0331614FA2C7A001708CE /* Reachability.m */,
 				87B0331714FA2C7A001708CE /* ASIAuthenticationDialog.h */,
@@ -328,6 +398,23 @@
 			name = JSON;
 			sourceTree = "<group>";
 		};
+		87B0337114FA35D8001708CE /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				87B0337214FA35FC001708CE /* Facebook.h */,
+				87B0337314FA35FC001708CE /* Facebook.m */,
+				87B0337414FA35FC001708CE /* FBConnect.h */,
+				87B0337514FA35FC001708CE /* FBDialog.bundle */,
+				87B0337614FA35FC001708CE /* FBDialog.h */,
+				87B0337714FA35FC001708CE /* FBDialog.m */,
+				87B0337814FA35FC001708CE /* FBLoginDialog.h */,
+				87B0337914FA35FC001708CE /* FBLoginDialog.m */,
+				87B0337A14FA35FC001708CE /* FBRequest.h */,
+				87B0337B14FA35FC001708CE /* FBRequest.m */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
 		AFC35F7513FEEF5E0043EAD6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,9 +424,6 @@
 				AFC35FE713FF35900043EAD6 /* RosyWriterVideoProcessor.m */,
 				289233A80DB2D0DB0083E9F9 /* RosyWriterViewController.h */,
 				289233A90DB2D0DB0083E9F9 /* RosyWriterViewController.m */,
-				95ECCDEE14FA28F80039770E /* PhotoPreviewViewController.h */,
-				95ECCDEF14FA28F80039770E /* PhotoPreviewViewController.m */,
-				95ECCDF014FA28F80039770E /* PhotoPreviewViewController.xib */,
 				26B0755713981396003A24D9 /* RosyWriterPreviewView.h */,
 				26B0755813981396003A24D9 /* RosyWriterPreviewView.m */,
 				1D3623240D0F684500981E51 /* RosyWriterAppDelegate.h */,
@@ -416,6 +500,14 @@
 				AF2A5C031434ED1F007EF597 /* RosyWriterViewController.xib in Resources */,
 				955110ED14F98E6D00907469 /* s.png in Resources */,
 				87B0331314FA2930001708CE /* FinalizePhudgeViewController.xib in Resources */,
+				87B0337D14FA35FC001708CE /* FBDialog.bundle in Resources */,
+				87B0339F14FA4C78001708CE /* btn-x2-facebook-pressed.png in Resources */,
+				87B033A014FA4C78001708CE /* btn-x2-facebook.png in Resources */,
+				87B033A114FA4C78001708CE /* btn-x2-save-pressed.png in Resources */,
+				87B033A214FA4C78001708CE /* btn-x2-save.png in Resources */,
+				87B033A314FA4C78001708CE /* btn-x2-saved.png in Resources */,
+				87B033A414FA4C78001708CE /* btn-x2-tumblr-pressed.png in Resources */,
+				87B033A514FA4C78001708CE /* btn-x2-tumblr.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +548,17 @@
 				87B0335014FA2C9F001708CE /* SBJsonUTF8Stream.m in Sources */,
 				87B0335114FA2C9F001708CE /* SBJsonWriter.m in Sources */,
 				87B0335514FA2CCD001708CE /* FJPhudgeServerInterface.m in Sources */,
-				95ECCDF114FA28F80039770E /* PhotoPreviewViewController.m in Sources */,
+				87B0337014FA35BB001708CE /* FJPhudgeFacebookInterface.m in Sources */,
+				87B0337C14FA35FC001708CE /* Facebook.m in Sources */,
+				87B0337E14FA35FC001708CE /* FBDialog.m in Sources */,
+				87B0337F14FA35FC001708CE /* FBLoginDialog.m in Sources */,
+				87B0338014FA35FC001708CE /* FBRequest.m in Sources */,
+				870046B21525E3F800ECD37B /* ASIS3Bucket.m in Sources */,
+				870046B31525E3F800ECD37B /* ASIS3BucketObject.m in Sources */,
+				870046B41525E3F800ECD37B /* ASIS3BucketRequest.m in Sources */,
+				870046B51525E3F800ECD37B /* ASIS3ObjectRequest.m in Sources */,
+				870046B61525E3F800ECD37B /* ASIS3Request.m in Sources */,
+				870046B71525E3F800ECD37B /* ASIS3ServiceRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

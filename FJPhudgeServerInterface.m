@@ -9,11 +9,29 @@
 #import "FJPhudgeServerInterface.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
+#import "ASIS3Request.h"
+#import "ASIS3ObjectRequest.h"
 #import "NSObject+SBJson.h"
 
 static FJPhudgeServerInterface * __sharedInterface = nil;
 
+
+NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+
+
 @implementation FJPhudgeServerInterface
+
++(NSString *) genRandStringLength: (int) len {
+    
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%c", [letters characterAtIndex: rand()%[letters length]]];
+    }
+    
+    return randomString;
+}
 
 + (NSString*)base64forData:(NSData*)theData {
     const uint8_t* input = (const uint8_t*)[theData bytes];
@@ -136,39 +154,65 @@ static FJPhudgeServerInterface * __sharedInterface = nil;
 
 - (void) uploadImage:(UIImage*)image withType:(NSString*)type andLocation:(CLLocation*)location
 {
-    NSString * path = [SERVER_URL stringByAppendingString:@"/photo"];
     
+    [ASIS3Request setSharedSecretAccessKey:@"ipWbVrA3nVz+23bN0vxGCTddIhgZWsoRko9wJJKn"];
+    [ASIS3Request setSharedAccessKey:@"AKIAJUXN42YLFXA235ZQ"];
     
-    NSURL * url = [NSURL URLWithString:path];
-    ASIFormDataRequest * request = [[ASIFormDataRequest alloc] initWithURL:url];
+    NSDate * date = [NSDate date];
+    
+    double timestamp = [date timeIntervalSince1970];
+    
+    NSString * fileKey = [@"images/" stringByAppendingFormat:@"%@-%.0f-%@.jpg", 
+                          type,
+                          timestamp, 
+                          [FJPhudgeServerInterface genRandStringLength:8]];
     
     NSData * imageData = UIImageJPEGRepresentation(image, 0.8);
+    ASIS3ObjectRequest *request = 
+    [ASIS3ObjectRequest PUTRequestForData:imageData
+                               withBucket:@"urandium" 
+                                      key:fileKey];
     
-    NSString * base64String = [FJPhudgeServerInterface base64forData:imageData];
-    
-    [request setPostValue:base64String forKey:@"imageData"];
-    
-    if (location) {
-        NSString * latLng = [NSString stringWithFormat:@"%f,%f", 
-                             location.coordinate.latitude,
-                             location.coordinate.longitude];
-        
-        [request setPostValue:latLng forKey:@"latLng"];
-    }
-    
-    [request setPostValue:type forKey:@"type"];
+    [request setAccessPolicy:ASIS3AccessPolicyPublicRead];
     
     [request setCompletionBlock:^{
-        NSLog(@"photo submitted successfully");
-        [request release];
+        NSString * path = [SERVER_URL stringByAppendingString:@"/photo"];
+        
+        
+        NSURL * url = [NSURL URLWithString:path];
+        ASIFormDataRequest * request = [[ASIFormDataRequest alloc] initWithURL:url];
+        
+        [request setPostValue:fileKey forKey:@"s3path"];
+        
+        if (location) {
+            NSString * latLng = [NSString stringWithFormat:@"%f,%f", 
+                                 location.coordinate.latitude,
+                                 location.coordinate.longitude];
+            
+            [request setPostValue:latLng forKey:@"latLng"];
+        }
+        
+        [request setPostValue:type forKey:@"type"];
+        
+        [request setCompletionBlock:^{
+            NSLog(@"photo submitted successfully");
+            [request release];
+        }];
+        
+        [request setFailedBlock:^{
+            NSLog(@"post photo failed");
+            [request release];
+        }];
+        
+        [request startAsynchronous];
+
     }];
     
     [request setFailedBlock:^{
-        NSLog(@"post photo failed");
-        [request release];
+        NSLog(@"could not upload image to S3");
     }];
-    
     [request startAsynchronous];
-}
+    
+    }
 
 @end
