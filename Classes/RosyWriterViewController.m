@@ -52,6 +52,7 @@
 //#import "PhotoPreviewViewController.h"
 #import "FinalizePhudgeViewController.h"
 #import "FJPhudgeServerInterface.h"
+#import "UIImage_Extensions.h"
 
 #define kTransitionDuration	0.75
 #define kUpdateFrequency 20  // Hz
@@ -65,6 +66,7 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 
 @interface RosyWriterViewController ()
 - (UIImage *)_mergeTopImage:(UIImage *)topImage bottomImage:(UIImage*) bottomImage;
+- (void)_gotoPreviewWithImage:(UIImage *)image;
 @end
 
 
@@ -384,46 +386,25 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 		 
 		 ALAssetsLibraryWriteImageCompletionBlock completionBlock = ^(NSURL *assetURL, NSError *error) {
 			 if (error) {
-				 // if ([[self delegate] respondsToSelector:@selector(captureManager:didFailWithError:)]) {
-				 //	[[self delegate] captureManager:self didFailWithError:error];
-				 // }
 			 }
 		 };
 		 
 		 if (imageDataSampleBuffer != NULL) {
 			 
+			 [videoProcessor captureOutput:[self stillImageOutput]
+					 didOutputSampleBuffer:imageDataSampleBuffer
+							fromConnection:stillImageConnection];
 			 
-			 
-			 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-//			 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+			 UIImage *image = [oglView imageFromFramebuffer];
+			 UIImage *rotatedImage = [image imageRotatedByDegrees:90];
+			 UIImage *flippedImage = [UIImage imageWithCGImage:rotatedImage.CGImage 
+														 scale:1.0 
+												   orientation:UIImageOrientationUpMirrored];
 
-			 UIImage *image = [[UIImage alloc] initWithData:imageData];
-			 FinalizePhudgeViewController *previewController = [[FinalizePhudgeViewController alloc] 
-                                                                initWithNibName:nil bundle:nil];
-             
-             previewController.capturedImage = [self _mergeTopImage:self.secondImage
-														bottomImage:image];
-			 
-			 // TODO: refactore downloadedImage to sth like original image
-			 previewController.downloadedImage = image;
-             
-			 [self.navigationController pushViewController:previewController animated:YES];
-			 [previewController release];
-			 
-//			 
-//			 [library writeImageToSavedPhotosAlbum:[image CGImage]
-//									   orientation:(ALAssetOrientation)[image imageOrientation]
-//								   completionBlock:completionBlock];
-			 [image release];
-			 
-//			 [library release];
+			 [self _gotoPreviewWithImage:flippedImage];
 		 }
 		 else
 			 completionBlock(nil, error);
-		 
-		 // if ([[self delegate] respondsToSelector:@selector(captureManagerStillImageCaptured:)]) {
-		 //	[[self delegate] captureManagerStillImageCaptured:self];
-		 // }
 	 }];
 }
 
@@ -434,6 +415,30 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	
 }
 
+
+- (void)removeImageView:(UITapGestureRecognizer *)tapGR
+{
+	[tapGR.view removeFromSuperview];
+}
+
+
+- (void)_gotoPreviewWithImage:(UIImage *)image
+{	
+	FinalizePhudgeViewController *previewController = [[FinalizePhudgeViewController alloc] 
+													   initWithNibName:nil bundle:nil];
+	
+	previewController.capturedImage = [self _mergeTopImage:self.secondImage
+											   bottomImage:image];
+	
+	// TODO: refactore downloadedImage to sth like original image
+	previewController.downloadedImage = image;
+	
+	[self.navigationController pushViewController:previewController animated:YES];
+	[previewController release];
+	
+	[image release];
+
+}
 
 #pragma mark - inclination
 
@@ -462,10 +467,6 @@ static inline double radians (double degrees) { return degrees * (M_PI / 180); }
 	oglView.z += directionZ * ((accelerationZ + 1) / 2) / k;
 	
 //	NSLog(@"%.2f %.2f %.2f (%.2f %.2f %.2f)", oglView.x, oglView.y, oglView.z, accelerationX, accelerationY, accelerationZ);
-	
-//    float calibratedAngle = [self calibratedAngleFromAngle:currentRawReading];
-    
-//    [levelView updateToInclinationInRadians:calibratedAngle];
 }
 
 

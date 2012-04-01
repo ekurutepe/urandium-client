@@ -55,6 +55,154 @@ enum {
     NUM_ATTRIBUTES
 };
 
+static size_t  _glReadPixelsBufferSize;
+static void   *_glReadPixelsBuffer;
+
+static inline const char * GLErrorString(GLenum error)
+{
+	const char *str;
+	switch( error )
+	{
+		case GL_NO_ERROR:
+			str = "GL_NO_ERROR";
+			break;
+		case GL_INVALID_ENUM:
+			str = "GL_INVALID_ENUM";
+			break;
+		case GL_INVALID_VALUE:
+			str = "GL_INVALID_VALUE";
+			break;
+		case GL_INVALID_OPERATION:
+			str = "GL_INVALID_OPERATION";
+			break;
+		case GL_OUT_OF_MEMORY:
+			str = "GL_OUT_OF_MEMORY";
+			break;
+#ifdef __gl_h_
+		case GL_STACK_OVERFLOW:
+			str = "GL_STACK_OVERFLOW";
+			break;
+		case GL_STACK_UNDERFLOW:
+			str = "GL_STACK_UNDERFLOW";
+			break;
+		case GL_TABLE_TOO_LARGE:
+			str = "GL_TABLE_TOO_LARGE";
+			break;
+#endif
+			//#if GL_EXT_framebuffer_object
+		case GL_INVALID_FRAMEBUFFER_OPERATION:
+			str = "GL_INVALID_FRAMEBUFFER_OPERATION";
+			break;
+			//#endif
+		default:
+			str = [[NSString stringWithFormat:@"(ERROR: Unknown GL Error Enum: %i)" , error] cStringUsingEncoding:NSASCIIStringEncoding];
+			break;
+	}
+	return str;
+}
+
+
+//  GL_FLOAT, GL_FLOAT_VEC2, GL_FLOAT_VEC3, GL_FLOAT_VEC4, 
+//	GL_INT, GL_INT_VEC2, GL_INT_VEC3, GL_INT_VEC4, 
+//	GL_BOOL, GL_BOOL_VEC2, GL_BOOL_VEC3, GL_BOOL_VEC4, 
+//	GL_FLOAT_MAT2, GL_FLOAT_MAT3, GL_FLOAT_MAT4, 
+//	GL_SAMPLER_2D, or GL_SAMPLER_CUBE 
+
+
+
+static inline const NSString *GLSLTypeNSString(GLenum type)
+{
+	NSString *str;
+	switch( type )
+	{
+		case GL_FLOAT:
+			str = @"GL_FLOAT";
+			break;
+		case GL_FLOAT_VEC2:
+			str = @"GL_FLOAT_VEC2";
+			break;
+		case GL_FLOAT_VEC3:
+			str = @"GL_FLOAT_VEC3";
+			break;
+		case GL_FLOAT_VEC4:
+			str = @"GL_FLOAT_VEC4";
+			break;
+		case GL_FLOAT_MAT2:
+			str = @"GL_FLOAT_MAT2";
+			break;
+		case GL_FLOAT_MAT3:
+			str = @"GL_FLOAT_MAT3";
+			break;
+		case GL_FLOAT_MAT4:
+			str = @"GL_FLOAT_MAT4";
+			break;
+		case GL_INT:
+			str = @"GL_INT";
+			break;
+		case GL_INT_VEC2:
+			str = @"GL_INT_VEC2";
+			break;
+		case GL_INT_VEC3:
+			str = @"GL_INT_VEC3";
+			break;
+		case GL_INT_VEC4:
+			str = @"GL_INT_VEC4";
+			break;
+		case GL_BOOL:
+			str = @"GL_BOOL";
+			break;
+		case GL_BOOL_VEC2:
+			str = @"GL_BOOL_VEC2";
+			break;
+		case GL_BOOL_VEC3:
+			str = @"GL_BOOL_VEC3";
+			break;
+		case GL_BOOL_VEC4:
+			str = @"GL_BOOL_VEC4";
+			break;
+		case GL_SAMPLER_2D:
+			str = @"GL_SAMPLER_2D";
+			break;
+		case GL_SAMPLER_CUBE:
+			str = @"GL_SAMPLER_CUBE";
+			break;
+		default:
+			str = @"??";
+			break;
+	}
+	return str;
+}
+
+#define GetGLError()									\
+{                                                       \
+														\
+	GLenum err = glGetError();							\
+	int noGLerror = 1;                                  \
+	while (err != GL_NO_ERROR) {						\
+		noGLerror = 0;                                  \
+		NSLog(@"GLError %s set in File:%s Line:%d\n",	\
+					GLErrorString(err),					\
+				__FILE__,								\
+				__LINE__);								\
+		err = glGetError();								\
+	}													\
+}
+
+
+void releasePixelDataCallback(void *info, const void *pixelData, size_t size);
+
+void releasePixelDataCallback(void *info, const void *pixelData, size_t size) 
+{
+    if (pixelData != NULL) {
+		
+        free(_glReadPixelsBuffer);    
+        _glReadPixelsBuffer = NULL;
+        _glReadPixelsBufferSize = 0;
+    }
+};
+
+
+
 @implementation RosyWriterPreviewView
 
 @synthesize x;
@@ -238,29 +386,6 @@ enum {
 	size_t frameWidth = CVPixelBufferGetWidth(pixelBuffer);
 	size_t frameHeight = CVPixelBufferGetHeight(pixelBuffer);
 
-    
-//	CVOpenGLESTextureRef secondExpTexture = NULL;
-//	CVImageBufferRef secondImageBuffer = 
-//    CVReturn err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, 
-//                                                                videoTextureCache,
-//                                                                pixelBuffer,
-//                                                                NULL,
-//                                                                GL_TEXTURE_2D,
-//                                                                GL_RGBA,
-//                                                                frameWidth,
-//                                                                frameHeight,
-//                                                                GL_BGRA,
-//                                                                GL_UNSIGNED_BYTE,
-//                                                                0,
-//                                                                &texture);
-    
-
-	
-	
-	
-	
-	
-	
 	CVOpenGLESTextureRef texture = NULL;
     CVReturn err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, 
                                                                 videoTextureCache,
@@ -319,6 +444,49 @@ enum {
     // Flush the CVOpenGLESTexture cache and release the texture
     CVOpenGLESTextureCacheFlush(videoTextureCache, 0);
     CFRelease(texture);
+}
+
+- (UIImage *)imageFromFramebuffer
+{    
+    //    http://stackoverflow.com/questions/3274244/memory-map-uiimage
+	
+    releasePixelDataCallback(NULL, _glReadPixelsBuffer, _glReadPixelsBufferSize);
+    
+	GLuint _width  = ceilf(self.layer.bounds.size.width  * self.layer.contentsScale);
+	GLuint _height = ceilf(self.layer.bounds.size.height * self.layer.contentsScale);
+
+	const size_t bytesPerPixel = 4;
+
+    _glReadPixelsBufferSize = _width * _height * bytesPerPixel;	
+	_glReadPixelsBuffer = (GLvoid*) malloc(_glReadPixelsBufferSize);
+
+    glPixelStorei(GL_PACK_ALIGNMENT, bytesPerPixel);
+    glReadPixels(0, 0, _width, _height, GL_RGBA, GL_UNSIGNED_BYTE, _glReadPixelsBuffer);
+	GetGLError();
+	
+	CGBitmapInfo bitmapInfoBitMask = kCGImageAlphaLast | kCGBitmapByteOrder32Big; /* XRGB Big Endian */
+	const size_t bitsPerComponent = 8;
+	const size_t bitsPerPixel = bytesPerPixel * bitsPerComponent;
+	const size_t bytesPerRow =  bytesPerPixel * _width;
+	
+    const CGColorSpaceRef colorspaceRef = CGColorSpaceCreateDeviceRGB();
+	
+    const CGDataProviderRef dataProviderRef = CGDataProviderCreateWithData(NULL, _glReadPixelsBuffer, _glReadPixelsBufferSize, releasePixelDataCallback);
+    
+    const CGImageRef framebufferImageRef = CGImageCreate(_width, _height, 
+														 bitsPerComponent, bitsPerPixel, bytesPerRow, 
+														 colorspaceRef, bitmapInfoBitMask, dataProviderRef,  
+														 NULL  /* decode array */, false,  /* should interpolate */
+														 kCGRenderingIntentDefault);
+    // Clean up 
+	CGColorSpaceRelease(colorspaceRef);
+	CGDataProviderRelease(dataProviderRef);
+    
+	
+	UIImage *image = [[[UIImage alloc] initWithCGImage:framebufferImageRef] autorelease];
+    CGImageRelease(framebufferImageRef);
+    
+    return image;
 }
 
 - (void)dealloc 

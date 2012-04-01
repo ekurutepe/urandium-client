@@ -70,6 +70,7 @@
 		955110CF14F9681F00907469 /* AVCamUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 955110CE14F9681F00907469 /* AVCamUtilities.m */; };
 		955110E514F9799F00907469 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955110E414F9799F00907469 /* CoreMotion.framework */; };
 		955110ED14F98E6D00907469 /* s.png in Resources */ = {isa = PBXBuildFile; fileRef = 955110EC14F98E6D00907469 /* s.png */; };
+		95EAB41315287E4D006F12FE /* UIImage_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EAB41215287E4D006F12FE /* UIImage_Extensions.m */; };
 		AF2A5C021434ED1F007EF597 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2A5BFE1434ED1F007EF597 /* MainWindow.xib */; };
 		AF2A5C031434ED1F007EF597 /* RosyWriterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2A5C001434ED1F007EF597 /* RosyWriterViewController.xib */; };
 		AF928C10140C2AD300844BAD /* ShaderUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = AF928C0E140C2AD300844BAD /* ShaderUtilities.c */; };
@@ -191,6 +192,8 @@
 		955110CE14F9681F00907469 /* AVCamUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamUtilities.m; sourceTree = "<group>"; };
 		955110E414F9799F00907469 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		955110EC14F98E6D00907469 /* s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s.png; sourceTree = "<group>"; };
+		95EAB41015287E22006F12FE /* UIImage_Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIImage_Extensions.h; sourceTree = "<group>"; };
+		95EAB41215287E4D006F12FE /* UIImage_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_Extensions.m; sourceTree = "<group>"; };
 		AF2A5BFF1434ED1F007EF597 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		AF2A5C011434ED1F007EF597 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RosyWriterViewController.xib; sourceTree = "<group>"; };
 		AF928C0E140C2AD300844BAD /* ShaderUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ShaderUtilities.c; path = Classes/ShaderUtilities.c; sourceTree = "<group>"; };
@@ -237,8 +240,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				955110CD14F9681F00907469 /* AVCamUtilities.h */,
-				955110CE14F9681F00907469 /* AVCamUtilities.m */,
 				AFC35FD913FEFC0A0043EAD6 /* Shaders */,
 				AFC35F7513FEEF5E0043EAD6 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -415,9 +416,29 @@
 			name = Facebook;
 			sourceTree = "<group>";
 		};
+		95EAB414152880D7006F12FE /* Image Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				95EAB41015287E22006F12FE /* UIImage_Extensions.h */,
+				95EAB41215287E4D006F12FE /* UIImage_Extensions.m */,
+			);
+			name = "Image Extensions";
+			sourceTree = "<group>";
+		};
+		95EAB415152880F6006F12FE /* Cam Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				955110CD14F9681F00907469 /* AVCamUtilities.h */,
+				955110CE14F9681F00907469 /* AVCamUtilities.m */,
+			);
+			name = "Cam Utilities";
+			sourceTree = "<group>";
+		};
 		AFC35F7513FEEF5E0043EAD6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				95EAB414152880D7006F12FE /* Image Extensions */,
+				95EAB415152880F6006F12FE /* Cam Utilities */,
 				87B0331414FA2C66001708CE /* Server Interface */,
 				87B0330D14FA28F3001708CE /* Finalize Phudge Screen */,
 				AFC35FE613FF35900043EAD6 /* RosyWriterVideoProcessor.h */,
@@ -559,6 +580,7 @@
 				870046B51525E3F800ECD37B /* ASIS3ObjectRequest.m in Sources */,
 				870046B61525E3F800ECD37B /* ASIS3Request.m in Sources */,
 				870046B71525E3F800ECD37B /* ASIS3ServiceRequest.m in Sources */,
+				95EAB41315287E4D006F12FE /* UIImage_Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

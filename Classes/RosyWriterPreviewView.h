@@ -76,6 +76,7 @@
 @property (nonatomic, retain) UIImage *secondExposure;
 
 - (void)displayPixelBuffer:(CVImageBufferRef)pixelBuffer;
+- (UIImage *)imageFromFramebuffer;
 
 @end
 
